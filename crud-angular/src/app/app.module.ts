@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,7 +18,8 @@ import { CoursesModule } from './courses/courses.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    CoursesModule
+    CoursesModule,
+    HttpClient
   ],
   providers: [],
   bootstrap: [AppComponent]
