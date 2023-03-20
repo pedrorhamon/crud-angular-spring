@@ -25,5 +25,4 @@ public class CrudSpringApplication {
 			repository.save(c);
 		};
 	}
-
 }

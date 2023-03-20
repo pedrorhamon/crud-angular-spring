@@ -2,9 +2,8 @@ package com.starking.crudspring.controllers;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.starking.crudspring.model.Course;
 import com.starking.crudspring.repositories.CourseRepository;
@@ -21,5 +20,10 @@ public class CourseController {
 	@GetMapping
 	public List<Course> list() {
 		return this.repository.findAll();
+	}
+	
+	@PostMapping
+	public ResponseEntity<Course> save() {
+		return ResponseEntity.accepted().build();
 	}
 }
