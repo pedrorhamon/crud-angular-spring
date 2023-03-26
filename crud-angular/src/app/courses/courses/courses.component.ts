@@ -47,4 +47,12 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
+  onDelete() {
+
+  }
+
+  onEdit() {
+
+  }
+
 }
