@@ -55,4 +55,8 @@ export class CoursesComponent implements OnInit {
 
   }
 
+  onClose() {
+
+  }
+
 }
