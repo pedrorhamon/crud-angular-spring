@@ -27,11 +27,11 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let course">
           <button mat-icon-button color="primary" aria-label="Editar curso">
-            <mat-icon>edit</mat-icon>
+            <mat-icon (click)="onEdit()">edit</mat-icon>
           </button>
 
           <button mat-icon-button color="warn" aria-label="Remover curso">
-            <mat-icon>delete</mat-icon>
+            <mat-icon (click)="onDelete()">delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
