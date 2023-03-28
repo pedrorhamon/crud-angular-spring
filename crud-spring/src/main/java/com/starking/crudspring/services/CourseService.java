@@ -2,6 +2,8 @@ package com.starking.crudspring.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.starking.crudspring.model.Course;
@@ -19,4 +21,16 @@ public class CourseService {
 		return this.courseRepository.findAll();
 	}
 	
+	@Transactional
+	public Course save(Course course) {
+		return this.courseRepository.save(course);
+	}
+	
+	public void getById(Long id) {
+		this.courseRepository.getById(id);
+	}
+	
+	public void delete(Long id) {
+		this.courseRepository.getById(id);
+	}
 }
