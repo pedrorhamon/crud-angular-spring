@@ -2,6 +2,8 @@ package com.starking.crudspring.controllers;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,5 +33,11 @@ public class CourseController {
 	public ResponseEntity<Course> save(@RequestBody Course course) {
 		Course courseEntity = this.service.save(course);
 		return ResponseEntity.status(HttpStatus.CREATED).body(courseEntity);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Long> getById(@PathParam("id") Long id) {
+		this.service.getById(id);
+		return ResponseEntity.ok(id);
 	}
 }
