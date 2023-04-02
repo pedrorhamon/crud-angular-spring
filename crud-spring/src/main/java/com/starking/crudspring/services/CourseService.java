@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.starking.crudspring.model.Course;
@@ -24,6 +25,12 @@ public class CourseService {
 	@Transactional
 	public Course save(Course course) {
 		return this.courseRepository.save(course);
+	}
+	
+	public Course update(Long id, Course course) {
+		Course courseUpdate = this.courseRepository.getById(id);
+		BeanUtils.copyProperties(course, courseUpdate, "id");
+		return this.courseRepository.save(courseUpdate);
 	}
 	
 	public void getById(Long id) {
