@@ -1,12 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Course } from '../models/course';
-import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -16,27 +10,18 @@ import { CoursesService } from '../services/courses.service';
 export class CoursesListComponent implements OnInit {
 
   @Input() courses: Course[] = [];
+  @Output() add = new EventEmitter(false);
   readonly displayedColumns = ['name', 'category', 'actions'];
 
-  constructor(
-    public dialog: MatDialog,
-    private courseService: CoursesService,
-    private router: Router,
-    private route: ActivatedRoute) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
   }
 
-  onError(errorMsg: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg
-    });
-  }
-
   onAdd() {
-    this.router.navigate(['new'], { relativeTo: this.route });
+    this.add.emit(true);
   }
 
   onDelete() {
@@ -45,9 +30,5 @@ export class CoursesListComponent implements OnInit {
 
   onEdit() {
 
-  }
-
-  onClose() {
-    this.router.navigate([''], { relativeTo: this.route });
   }
 }
