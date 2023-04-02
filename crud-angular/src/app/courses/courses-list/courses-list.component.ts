@@ -48,7 +48,6 @@ export class CoursesListComponent implements OnInit {
   }
 
   onClose() {
-
+    this.router.navigate([''], { relativeTo: this.route });
   }
-
 }
