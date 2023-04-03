@@ -25,11 +25,8 @@ export class CoursesListComponent implements OnInit {
     this.add.emit(true);
   }
 
-  onDelete() {
-
-  }
-
   onEdit(course: Course) {
-    this.edit.emit(course);
+    this.edit.emit(course)
+
   }
 }

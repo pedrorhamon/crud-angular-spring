@@ -22,8 +22,7 @@ export class CoursesService {
   }
 
   findById(id: string) {
-    return this.httpClient.get<Course>(`${this.API}/${id}`)
-
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
   }
 
   save(record: Course) {

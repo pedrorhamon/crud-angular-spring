@@ -1,9 +1,11 @@
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CoursesService } from '../../services/courses.service';
+import { Course } from '../../models/course';
 
 @Component({
   selector: 'app-course-form',
@@ -13,24 +15,31 @@ import { CoursesService } from '../../services/courses.service';
 export class CourseFormComponent implements OnInit {
 
   form = this.formBuilder.group({
+    id: [''],
     name: ['', Validators.required],
     category : ['', Validators.required]
   });
 
   constructor(private formBuilder: FormBuilder,
     private service: CoursesService,
-    private _snackBar: MatSnackBar,
-    private location: Location) {
+    private snackBar: MatSnackBar,
+    private location: Location,
+    private route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-    this.form.value;
+    const course: Course = this.route.snapshot.data['course'];
+    this.form.setValue({
+      id: course.id,
+      name: course.name,
+      category: course.category
+    });
   }
 
   onSubmit() {
-    this.service.save(this.form.value).subscribe(result => this.onSuccess(), error => this.onError());
-    this.onCancel();
+    this.service.save(this.form.value)
+      .subscribe(result => this.onSuccess(), error => this.onError());
   }
 
   onCancel() {
@@ -38,11 +47,12 @@ export class CourseFormComponent implements OnInit {
   }
 
   private onSuccess() {
-    this._snackBar.open('Sucesso ao salvar curso', '', {duration: 5000});
+    this.snackBar.open('Curso salvo com sucesso!', '', { duration: 5000 });
+    this.onCancel();
   }
 
   private onError() {
-    this._snackBar.open('Erro ao salvar curso', '', {duration: 5000});
+    this.snackBar.open('Erro ao salvar curso.', '', { duration: 5000 });
   }
 
 }
