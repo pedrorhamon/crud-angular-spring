@@ -1,6 +1,7 @@
 package com.starking.crudspring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -33,8 +34,8 @@ public class CourseService {
 		return this.courseRepository.save(courseUpdate);
 	}
 	
-	public void getById(Long id) {
-		this.courseRepository.getById(id);
+	public Optional<Course> getById(Long id) {
+		return this.courseRepository.findById(id);
 	}
 	
 	public void delete(Long id) {

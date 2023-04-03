@@ -2,12 +2,12 @@ package com.starking.crudspring.controllers;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +36,15 @@ public class CourseController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Long> getById(@PathParam("id") Long id) {
-		this.service.getById(id);
-		return ResponseEntity.ok(id);
+	public ResponseEntity<Course> findById(@PathVariable("id") Long id) {
+		return this.service.getById(id)
+				.map(record -> ResponseEntity.ok().body(record))
+				.orElse(ResponseEntity.notFound().build());
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Course> update(@PathVariable("id") Long id, Course course) {
+		this.service.update(id, course);
+		return ResponseEntity.noContent().build();
 	}
 }
