@@ -2,6 +2,10 @@ package com.starking.crudspring.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,9 +46,11 @@ public class CourseController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Course> update(@PathVariable("id") Long id, Course course) {
-		this.service.update(id, course);
-		return ResponseEntity.noContent().build();
-	}
+	 @PutMapping("/{id}")
+	    public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id,
+	            @RequestBody @Valid Course course) {
+	        return this.service.update(id, course)
+	                .map(recordFound -> ResponseEntity.ok().body(recordFound))
+	                .orElse(ResponseEntity.notFound().build());
+	    }
 }
