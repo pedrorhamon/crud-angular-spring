@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/ConfirmationDialogComponent';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Course } from '../../models/course';
 import { CoursesService } from '../../services/courses.service';
